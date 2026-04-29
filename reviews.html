@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews - Badminton Pro Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <span class="logo-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 39l-7 7c-1.2 1.2-3.1 1.2-4.3 0l-1.7-1.7c-1.2-1.2-1.2-3.1 0-4.3l7-7 6 6z"/>
+                            <path d="M45 19c-4.9-4.9-12.8-5-17.8 0L20 26.2c-5 5-5 12.9 0 17.8l12-12 13-12z"/>
+                            <path d="M43 20l13-13 3.5 3.5-13 13L43 20zM47 24l11-11 2 2-11 11-2-2z"/>
+                            <path d="M30 44l10-10 4 4-10 10-4-4z"/>
+                        </svg>
+                    </span>
+                    <span>Badminton Pro</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a style="color: #ffbf69;" href="index.html">Home</a></li>
+                    <li><a style="color: #ffbf69;" href="products.html">Products</a></li>
+                    <li><a style="color: #ffbf69;" href="reviews.html">Reviews</a></li>
+                    <li><a style="color: #ffbf69;" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="cart-btn" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero" style="background: linear-gradient(45deg, #38040e, #ad2831);">
+            <div class="container">
+                <h1>Customer Reviews</h1>
+                <p>What our customers say about our premium badminton equipment</p>
+            </div>
+        </section>
+
+        <section class="reviews">
+            <div class="container">
+                <div class="reviews-container">
+                    <div class="reviews-slider" id="reviewsSlider">
+                        <!-- Reviews will be dynamically loaded -->
+                    </div>
+                    <div class="slider-controls">
+                        <button class="slider-btn prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="slider-btn next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Additional Review Stats -->
+                <div class="review-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" style="color: #9d0208;">4.8</div>
+                        <div class="stat-label">Average Rating</div>
+                        <div class="stat-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" style="color: #9d0208;">500+</div>
+                        <div class="stat-label">Happy Customers</div>
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" style="color: #9d0208;">98%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                        <div class="stat-icon">
+                            <i class="fas fa-thumbs-up"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <span class="logo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M23 39l-7 7c-1.2 1.2-3.1 1.2-4.3 0l-1.7-1.7c-1.2-1.2-1.2-3.1 0-4.3l7-7 6 6z"/>
+                                <path d="M45 19c-4.9-4.9-12.8-5-17.8 0L20 26.2c-5 5-5 12.9 0 17.8l12-12 13-12z"/>
+                                <path d="M43 20l13-13 3.5 3.5-13 13L43 20zM47 24l11-11 2 2-11 11-2-2z"/>
+                                <path d="M30 44l10-10 4 4-10 10-4-4z"/>
+                            </svg>
+                        </span>
+                        <span>Badminton Pro</span>
+                    </div>
+                    <p>Your trusted source for premium badminton equipment.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@badmintonpro.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Sports Ave, City, ST 12345</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Badminton Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Shopping Cart</h3>
+                <span class="close" id="closeCart">&times;</span>
+            </div>
+            <div class="modal-body" id="cartItems">
+                <!-- Cart items will be dynamically loaded -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="clearCart">Clear Cart</button>
+                <button class="cta-btn" id="checkoutBtn">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
