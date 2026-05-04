@@ -144,12 +144,14 @@ body {
 
 /* Hero Section */
 .hero {
+    background-image: url(https://www.malaymail.com/uploads/imported_images/2021/2021-08/Viktor_Axelsen_02082021.jpg);
+    background-size: 100% 100%;
     display: flex;
     align-items: center;
     min-height: 100vh;
     padding: 120px 0 80px;
     color: white;
-    background: linear-gradient(45deg, #38040e, #ad2831);
+    /* background: linear-gradient(45deg, #38040e, #ad2831); */
     gap: 2rem;
 }
 
@@ -202,6 +204,7 @@ body {
 }
 
 .hero-image {
+   
     flex: 1;
     text-align: center;
 }
@@ -211,158 +214,6 @@ body {
     height: auto;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-/* Hero Carousel */
-.hero-carousel {
-    flex: 1;
-    position: relative;
-    min-height: 420px;
-    max-height: 540px;
-    width: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.carousel-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.carousel-slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: scale(1.1);
-}
-
-.carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: brightness(0.7);
-    transition: filter 0.8s ease;
-}
-
-.carousel-slide.active {
-    opacity: 1;
-    transform: scale(1);
-    z-index: 5;
-}
-
-.carousel-slide.active img {
-    filter: brightness(0.9);
-}
-
-.slide-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    padding: 3rem 2rem 2rem;
-    color: white;
-    transform: translateY(100%);
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.carousel-slide.active .slide-overlay {
-    transform: translateY(0);
-}
-
-.slide-overlay h3 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.slide-overlay p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.carousel-controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 1.5rem;
-    transform: translateY(-50%);
-    z-index: 20;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.hero-carousel:hover .carousel-controls {
-    opacity: 1;
-}
-
-.carousel-btn {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    color: white;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.carousel-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
-}
-
-.carousel-btn:active {
-    transform: scale(0.95);
-}
-
-.carousel-indicators {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 1rem;
-    z-index: 10;
-}
-
-.indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-}
-
-.indicator.active {
-    background: white;
-    transform: scale(1.4);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-}
-
-.indicator:hover {
-    background: rgba(255, 255, 255, 0.7);
-    transform: scale(1.2);
 }
 
 /* Products Section */
@@ -774,19 +625,6 @@ body {
         font-size: 2.5rem;
     }
 
-    .hero-carousel {
-        height: min(55vh, 380px);
-        width: 100%;
-        max-width: 820px;
-        margin: 0 auto;
-    }
-
-    .carousel-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-
     .products-grid {
         grid-template-columns: 1fr;
     }
@@ -824,33 +662,6 @@ body {
 
     .hero-content p {
         font-size: 1rem;
-    }
-
-    .hero-carousel {
-        height: min(50vh, 320px);
-        width: 100%;
-        max-width: 100%;
-        border-radius: 16px;
-    }
-
-    .carousel-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 0.95rem;
-    }
-
-    .carousel-controls {
-        padding: 0 1rem;
-    }
-
-    .carousel-indicators {
-        gap: 0.6rem;
-        bottom: 1.4rem;
-    }
-
-    .indicator {
-        width: 10px;
-        height: 10px;
     }
 
     .nav-container {
