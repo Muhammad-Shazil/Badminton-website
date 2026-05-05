@@ -9,29 +9,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div class="top-bar">Free Shipping: all orders over $99</div>
     <header class="header">
         <nav class="nav">
             <div class="nav-container">
                 <div class="logo">
-                    <svg class="logo-badge" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Shuttlecock -->
-                        <circle cx="32" cy="12" r="4" fill="#ffbf69"/>
-                        <!-- Shuttlecock feathers -->
-                        <path d="M32 16 Q28 22 26 32 Q30 30 32 30 Q34 30 38 32 Q36 22 32 16" fill="#ffbf69" opacity="0.8"/>
-                        <!-- Racket handle -->
-                        <rect x="30" y="32" width="4" height="20" fill="#764ba2"/>
-                        <!-- Racket head -->
-                        <circle cx="32" cy="28" r="12" fill="none" stroke="#764ba2" stroke-width="2"/>
-                    </svg>
+                    <span class="logo-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 39l-7 7c-1.2 1.2-3.1 1.2-4.3 0l-1.7-1.7c-1.2-1.2-1.2-3.1 0-4.3l7-7 6 6z"/>
+                            <path d="M45 19c-4.9-4.9-12.8-5-17.8 0L20 26.2c-5 5-5 12.9 0 17.8l12-12 13-12z"/>
+                            <path d="M43 20l13-13 3.5 3.5-13 13L43 20zM47 24l11-11 2 2-11 11-2-2z"/>
+                            <path d="M30 44l10-10 4 4-10 10-4-4z"/>
+                        </svg>
+                    </span>
                     <span>Badminton Pro</span>
                 </div>
                 <ul class="nav-menu">
-                    <li><a style="color: #ffbf69;" href="index.html">Home</a></li>
-                    <li><a style="color: #ffbf69;" href="products.html">Products</a></li>
-                    <li><a style="color: #ffbf69;"href="reviews.html">Reviews</a></li>
-                    <li><a style="color: #ffbf69;" href="contact.html">Contact</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
                 <div class="nav-actions">
+                    <div class="nav-search">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <input type="search" id="navSearch" placeholder="Search products..." aria-label="Search products">
+                    </div>
                     <button class="cart-btn" id="cartBtn">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
@@ -43,13 +46,14 @@
             </div>
         </nav>
     </header>
+               
 
     <main>
         <section id="home" class="hero">
             <div class="hero-content">
-                <h1>Elevate Your Game</h1>
-                <p>Premium badminton equipment for professionals and enthusiasts</p>
-                <a style="background: linear-gradient(45deg, #ad2831, #e85d04);" href="products.html" class="cta-btn">Shop Now</a>
+                <h1>Play like a Pro</h1>
+                <p>Premium badminton equipment</p>
+                <button onclick="window.location.href='products.html'" class="shop-btn">Shop Now</button>
             </div>
         </section>
 
@@ -61,20 +65,20 @@
                 <div class="preview-grid">
                     <div class="preview-card">
                         <div class="preview-image">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-qb5hT6CtxRGQYAthFbYkDBdsdmw1sHHHAw&s" alt="Yonex Astrox 88D Pro Badminton Racket">
+                            <img src="https://www.alisports.pk/cdn/shop/files/8097_GO_1615791115078.jpg?v=1688500259&width=1946" alt="Yonex Astrox 88D Pro Badminton Racket">
                         </div>
                         <div class="preview-info">
                             <h3>Yonex Astrox 88D Pro Badminton Racket</h3>
-                            <p class="preview-price" style="color: #9d0208;">$299.99</p>
+                            <p class="preview-price">$299.99</p>
                         </div>
                     </div>
                     <div class="preview-card">
                         <div class="preview-image">
-                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Li-Ning Turbo Charging 70 Badminton Shoes">
+                            <img src="https://wowsole.com/wp-content/uploads/2024/09/Li-Ning-Shadow-3-Pro-Running-Shoes-Orange-Black.jpg" alt="Li-Ning Turbo Charging 70 Badminton Shoes">
                         </div>
                         <div class="preview-info">
                             <h3>Li-Ning Turbo Charging 70 Badminton Shoes</h3>
-                            <p class="preview-price" style="color: #9d0208;">$149.99</p>
+                            <p class="preview-price">$149.99</p>
                         </div>
                     </div>
                     <div class="preview-card">
@@ -83,12 +87,12 @@
                         </div>
                         <div class="preview-info">
                             <h3>Victor Master Ace Badminton Racket</h3>
-                            <p class="preview-price" style="color: #9d0208;">$189.99</p>
+                            <p class="preview-price">$189.99</p>
                         </div>
                     </div>
                 </div>
                 <div class="preview-cta">
-                    <a href="products.html" class="cta-btn">View All Products</a>
+                    <a href="products.html" class="p-btn">View All Products</a>
                 </div>
             </div>
         </section>
@@ -140,9 +144,9 @@
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <ul>
-                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-envelope"></i> info@badmintonpro.com</li>
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Sports Ave, City, ST 12345</li>
+                        <li><i class="fas fa-phone" style="color: #1a73a8;"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope" style="color: #1a73a8;"></i> info@badmintonpro.com</li>
+                        <li><i class="fas fa-map-marker-alt" style="color: #1a73a8;"></i> 123 Sports Ave, City, ST 12345</li>
                     </ul>
                 </div>
             </div>
@@ -163,7 +167,7 @@
                 <!-- Cart items will be dynamically loaded -->
             </div>
             <div class="modal-footer">
-                <button class="btn-secondary" id="clearCart">Clear Cart</button>
+                <button class="btn-secondary" id="clearCart" style="background-color: #1a73a8;">Clear Cart</button>
                 <button class="cta-btn" id="checkoutBtn">Checkout</button>
             </div>
         </div>

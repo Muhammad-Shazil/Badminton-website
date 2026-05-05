@@ -1,11 +1,11 @@
-// Sample data
+﻿// Sample data
 const products = [
     {
         id: 1,
         name: "Yonex Astrox 88D Pro Badminton Racket",
         price: 299.99,
         rating: 4.8,
-        image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-qb5hT6CtxRGQYAthFbYkDBdsdmw1sHHHAw&s"
     },
     {
         id: 2,
@@ -19,28 +19,28 @@ const products = [
         name: "Victor Master Ace Badminton Racket",
         price: 189.99,
         rating: 4.7,
-        image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        image: "https://cdn.shopify.com/s/files/1/0723/9035/products/Victor_WE_140_F_3_yumoproshop_large.jpg?v=1638516746"
     },
     {
         id: 4,
         name: "Yonex Aerosensa 30 Shuttlecocks (Pack of 12)",
         price: 49.99,
         rating: 4.9,
-        image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        image: "https://media.newitts.com/cdn/images/products/new-design/300x300/it027896a.jpg"
     },
     {
         id: 5,
         name: "Li-Ning Badminton Net Professional",
         price: 79.99,
         rating: 4.5,
-        image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT3etjBADEwrIJvJRd-e5qxpqqyamJ0ixidQ&s"
     },
     {
         id: 6,
         name: "Victor Badminton Bag Professional",
         price: 89.99,
         rating: 4.4,
-        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEnx8MbuMi19VRS-yVo80_mkQcOaKvp5PHFA&s"
     }
 ];
 
@@ -67,11 +67,9 @@ const reviews = [
     }
 ];
 
-// Cart functionality
 let cart = [];
 let currentReviewIndex = 0;
 
-// DOM elements
 const productsGrid = document.getElementById('productsGrid');
 const reviewsSlider = document.getElementById('reviewsSlider');
 const cartBtn = document.getElementById('cartBtn');
@@ -83,20 +81,92 @@ const clearCartBtn = document.getElementById('clearCart');
 const checkoutBtn = document.getElementById('checkoutBtn');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
+const navSearchInput = document.getElementById('navSearch');
+const previewCards = document.querySelectorAll('.preview-card');
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.querySelector('.nav-menu');
 
-// Initialize the website
-document.addEventListener('DOMContentLoaded', function() {
+function init() {
     if (reviewsSlider) {
         loadReviews();
     }
-
-    setupEventListeners();
     updateCartCount();
-});
+    setupEventListeners();
+}
 
-// Generate star rating
+function setupEventListeners() {
+    if (cartBtn) {
+        cartBtn.addEventListener('click', openCartModal);
+    }
+
+    if (closeCart) {
+        closeCart.addEventListener('click', closeCartModal);
+    }
+
+    if (clearCartBtn) {
+        clearCartBtn.addEventListener('click', clearCart);
+    }
+
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', checkout);
+    }
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    document.body.addEventListener('click', function(event) {
+        const button = event.target.closest('.add-to-cart, .add-cart');
+        if (button && button.dataset.id) {
+            addToCart(parseInt(button.dataset.id, 10));
+        }
+    });
+
+    if (navMenu) {
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+
+    if (navSearchInput) {
+        navSearchInput.addEventListener('input', function() {
+            const query = this.value.trim().toLowerCase();
+            previewCards.forEach(card => {
+                const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                card.style.display = title.includes(query) ? '' : 'none';
+            });
+        });
+    }
+
+    if (cartModal) {
+        window.addEventListener('click', function(event) {
+            if (event.target === cartModal) {
+                closeCartModal();
+            }
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', prevReview);
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextReview);
+    }
+
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleContactFormSubmission();
+        });
+    }
+}
+
 function generateStars(rating) {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 !== 0;
@@ -118,145 +188,66 @@ function generateStars(rating) {
     return stars;
 }
 
-// Load reviews
 function loadReviews() {
     if (!reviewsSlider) return;
+
     reviewsSlider.innerHTML = '';
     reviews.forEach(review => {
-        const reviewCard = createReviewCard(review);
+        const reviewCard = document.createElement('div');
+        reviewCard.className = 'review-card';
+        reviewCard.innerHTML = `
+            <p class="review-text">"${review.text}"</p>
+            <h4 class="review-author">${review.author}</h4>
+            <div class="review-rating">${generateStars(review.rating)}</div>
+        `;
         reviewsSlider.appendChild(reviewCard);
     });
     updateReviewSlider();
 }
 
-// Create review card
-function createReviewCard(review) {
-    const card = document.createElement('div');
-    card.className = 'review-card';
-    card.innerHTML = `
-        <p class="review-text">"${review.text}"</p>
-        <h4 class="review-author">${review.author}</h4>
-        <div class="review-rating">${generateStars(review.rating)}</div>
-    `;
-    return card;
-}
-
-// Update review slider position
-function updateReviewSlider() {
-    const reviewCards = document.querySelectorAll('.review-card');
-    reviewCards.forEach((card, index) => {
-        card.style.transform = `translateX(${100 * (index - currentReviewIndex)}%)`;
-    });
-}
-
-
-// Setup event listeners
-function setupEventListeners() {
-    // Add to cart buttons
-    if (productsGrid) {
-        productsGrid.addEventListener('click', function(e) {
-            if (e.target.classList.contains('add-to-cart')) {
-                const productId = parseInt(e.target.dataset.id);
-                addToCart(productId);
-            }
-        });
-    }
-
-    // Cart modal
-    if (cartBtn && closeCart && cartModal) {
-        cartBtn.addEventListener('click', openCartModal);
-        closeCart.addEventListener('click', closeCartModal);
-        window.addEventListener('click', function(e) {
-            if (e.target === cartModal) {
-                closeCartModal();
-            }
-        });
-    }
-
-    // Cart actions
-    if (clearCartBtn) {
-        clearCartBtn.addEventListener('click', clearCart);
-    }
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', checkout);
-    }
-
-    // Review slider
-    if (prevBtn) {
-        prevBtn.addEventListener('click', prevReview);
-    }
-    if (nextBtn) {
-        nextBtn.addEventListener('click', nextReview);
-    }
-
-    // Mobile menu
-    if (menuToggle) {
-        menuToggle.addEventListener('click', toggleMobileMenu);
-    }
-
-    // Smooth scrolling for navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Contact form submission
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            handleContactFormSubmission();
-        });
-    }
-}
-
-// Add to cart
 function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    if (product) {
-        const existingItem = cart.find(item => item.id === productId);
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({ ...product, quantity: 1 });
-        }
-        updateCartCount();
-        showNotification(`${product.name} added to cart!`);
+    const product = products.find(item => item.id === productId);
+    if (!product) return;
+
+    const existingItem = cart.find(item => item.id === productId);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ ...product, quantity: 1 });
     }
+
+    updateCartCount();
+    openCartModal();
+    alert(`${product.name} added to cart!`);
 }
 
-// Update cart count
 function updateCartCount() {
+    if (!cartCount) return;
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartCount.textContent = totalItems;
 }
 
-// Open cart modal
 function openCartModal() {
+    if (!cartModal) return;
     updateCartDisplay();
-    cartModal.style.display = 'block';
+    cartModal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    if (cartBtn) cartBtn.classList.add('active');
 }
 
-// Close cart modal
 function closeCartModal() {
+    if (!cartModal) return;
     cartModal.style.display = 'none';
     document.body.style.overflow = 'auto';
+    if (cartBtn) cartBtn.classList.remove('active');
 }
 
-// Update cart display
 function updateCartDisplay() {
+    if (!cartItems) return;
     cartItems.innerHTML = '';
+
     if (cart.length === 0) {
-        cartItems.innerHTML = '<p>Your cart is empty.</p>';
+        cartItems.innerHTML = '<p class="empty-cart-message">Your cart is empty.</p>';
         return;
     }
 
@@ -274,25 +265,23 @@ function updateCartDisplay() {
     });
 }
 
-// Clear cart
 function clearCart() {
     cart = [];
     updateCartCount();
     updateCartDisplay();
 }
 
-// Checkout
 function checkout() {
     if (cart.length === 0) {
-        showNotification('Your cart is empty!');
+        alert('Your cart is empty!');
         return;
     }
-    showNotification('Checkout functionality would be implemented here!');
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    alert(`Proceeding to checkout. Total: $${total.toFixed(2)}`);
     clearCart();
     closeCartModal();
 }
 
-// Review navigation
 function prevReview() {
     currentReviewIndex = (currentReviewIndex - 1 + reviews.length) % reviews.length;
     updateReviewSlider();
@@ -303,66 +292,37 @@ function nextReview() {
     updateReviewSlider();
 }
 
-// Toggle mobile menu
+function updateReviewSlider() {
+    if (!reviewsSlider) return;
+    const reviewCards = reviewsSlider.querySelectorAll('.review-card');
+    reviewCards.forEach((card, index) => {
+        card.style.transform = `translateX(${100 * (index - currentReviewIndex)}%)`;
+    });
+}
+
 function toggleMobileMenu() {
-    navMenu.classList.toggle('active');
+    if (navMenu) {
+        navMenu.classList.toggle('active');
+    }
 }
 
-// Show notification
-function showNotification(message) {
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #667eea;
-        color: white;
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        z-index: 3000;
-        animation: slideInRight 0.3s ease;
-    `;
-
-    document.body.appendChild(notification);
-
-    // Remove notification after 3 seconds
-    setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.3s ease';
-        setTimeout(() => {
-            document.body.removeChild(notification);
-        }, 300);
-    }, 3000);
-}
-
-// Add notification animations to CSS
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInRight {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes slideOutRight {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(100%); opacity: 0; }
-    }
-`;
-document.head.appendChild(style);
-
-// Auto-slide reviews
-setInterval(nextReview, 5000);
-
-// Handle contact form submission
 function handleContactFormSubmission() {
-    const form = document.getElementById('contactForm');
-    const formData = new FormData(form);
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const subject = document.getElementById('subject');
+    const message = document.getElementById('message');
+    if (!name || !email || !subject || !message) return;
 
-    // Simulate form submission (in a real app, this would send to a server)
-    showNotification('Thank you for your message! We\'ll get back to you soon.');
-
-    // Reset form
-    form.reset();
+    const formData = {
+        name: name.value,
+        email: email.value,
+        subject: subject.value,
+        message: message.value
+    };
+    console.log('Contact form submitted', formData);
+    alert('Thank you for your message! We will get back to you soon.');
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) contactForm.reset();
 }
+
+document.addEventListener('DOMContentLoaded', init);
